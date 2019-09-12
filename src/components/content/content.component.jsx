@@ -38,13 +38,14 @@ class Content extends Component {
     }
     addElement = (event) => {
         event.preventDefault();
-        console.log("submit");
 
-         this.setState({
-            list: this.state.list.concat({title: this.state.title, category: this.state.category}),
-            title: '',
-            category: ''
-        }) 
+        if(this.state.title != '' && this.state.category != '') {
+            this.setState({
+                list: this.state.list.concat({title: this.state.title, category: this.state.category}),
+                title: '',
+                category: ''
+            })   
+        }          
     }
     removeElement = (title) => {
         this.setState({
