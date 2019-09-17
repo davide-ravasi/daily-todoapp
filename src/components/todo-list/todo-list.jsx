@@ -48,7 +48,7 @@ const TodoList = (props) => {
                         {el.title}
                     </Typography>
                     <Chip label={el.category} className={classes.chip} />  
-                    <IconButton aria-label="delete" className={classes.closeBtn} onClick={ () => props.removeElement(el.title) }>
+                    <IconButton aria-label="delete" className={classes.closeBtn} onClick={ () => props.removeElement(el.id) }>
                         <DeleteIcon fontSize="small" />
                     </IconButton>
                 </Paper>

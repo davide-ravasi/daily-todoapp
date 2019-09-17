@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import AddElement from '../add-element/add.element';
 import TodoList from '../todo-list/todo-list';
 
+import firebase from '../../firebase/firebase.js'; // <--- add this line
+
 import Container from '@material-ui/core/Container';
 
 class Content extends Component {
@@ -9,23 +11,57 @@ class Content extends Component {
         super();
 
         this.state = {
-            list: [
-                {
-                    title: 'ex_1',
-                    category: 'cnam'
-                },
-                {
-                    title: 'video 2',
-                    category: 'udemy node'
-                },
-                {
-                    title: 'video 3',
-                    category: 'udemy react'
-                }
-            ],
+            list: [],
+            categories: [],
             title: '',
             category: ''
         }
+    }
+    componentDidMount() {
+      const itemsRef = firebase.database().ref('items');
+      const catsRef = firebase.database().ref('categories');
+        
+      catsRef.on('value', (snapshot) => {
+          let cats = snapshot.val();
+          let newState = [];
+          
+         for (let cat in cats) {
+              newState.push({ 
+                title: cats[cat].title,
+                color: cats[cat].color
+              });
+         }
+          
+        this.setState({
+            categories: newState
+        })   
+      })
+        
+        
+        
+//       const catsRef = firebase.database().ref('categories');  
+        
+//         catsRef.push({
+//           title: "Udemy React",
+//           color: "7986cb"  
+//         });
+        
+      itemsRef.on('value', (snapshot) => {
+        let items = snapshot.val();
+        let newState = [];
+          
+        for (let item in items) {
+          newState.push({
+            id: item,  
+            title: items[item].title,
+            category: items[item].category
+          });
+        }
+          
+        this.setState({
+            list: newState
+        })   
+      });
     }
     onChangeValue = (e) => {
         const target = e.target;
@@ -40,19 +76,23 @@ class Content extends Component {
         event.preventDefault();
 
         if(this.state.title != '' && this.state.category != '') {
+            
+            const itemsRef = firebase.database().ref('items');
+            const item = {
+                title: this.state.title,
+                category: this.state.category
+            }
+            itemsRef.push(item);           
+                        
             this.setState({
-                list: this.state.list.concat({title: this.state.title, category: this.state.category}),
                 title: '',
                 category: ''
             })   
         }          
     }
-    removeElement = (title) => {
-        this.setState({
-            list: this.state.list.filter((element) => {
-                return element.title != title
-            })
-        })
+    removeElement = (itemId) => {
+        const itemRef = firebase.database().ref(`/items/${itemId}`);
+        itemRef.remove();
     }
     render() {
         return (
@@ -60,6 +100,7 @@ class Content extends Component {
                 <AddElement onChangeValue={this.onChangeValue} 
                             addElement={this.addElement} 
                             title={this.state.title} 
+                            categories={this.state.categories}
                             category={this.state.category}  />
                 <TodoList list={this.state.list} removeElement={this.removeElement} />
             </Container>
