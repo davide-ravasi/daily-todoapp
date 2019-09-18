@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles(theme => ({
   addElBox: {
@@ -33,14 +34,32 @@ const useStyles = makeStyles(theme => ({
     width: 250,
   },
   button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
     margin: theme.spacing(1),
-    marginTop: 20, 
-  }
+    minWidth: 120,
+  },  
 }));
 
 
 export default function AddElement(props) {
-    const classes = useStyles();
+  const classes = useStyles();
+  const [age, setAge] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+
+  function handleChange(event) {
+    setAge(event.target.value);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+  function handleOpen() {
+    setOpen(true);
+  }
 //     const inputLabel = React.useRef(null);
 //     const [labelWidth, setLabelWidth] = React.useState(0);
 //     React.useEffect(() => {
@@ -57,20 +76,25 @@ export default function AddElement(props) {
                 value={props.title} 
                 fullWidth
                 onChange={(e) => props.onChangeValue(e)}  />
+            <FormControl className={classes.formControl}>
             <InputLabel htmlFor="category">category</InputLabel>
             <Select
-              value={props.category} 
-              className={classes.selectField}
-              onChange={(e) => props.onChangeValue(e)}
-              inputProps={{
-                name: 'category',
-                id: 'category',
-              }}
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={props.category} 
+                className={classes.selectField}
+                onChange={(e) => props.onChangeValue(e)}
+                inputProps={{
+                    name: 'category',
+                    id: 'category',
+                }}
             >
                 {props.categories.map((value, index) => {
                     return <MenuItem value={value.title}>{value.title}</MenuItem>
                 })}
             </Select>
+            </FormControl>    
             <Button type="submit" variant="contained" color="primary" className={classes.button}>Add</Button>
         </form>
     </div>)

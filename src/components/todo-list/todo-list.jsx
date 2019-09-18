@@ -40,9 +40,10 @@ const useStyles = makeStyles(theme => ({
 
 const TodoList = (props) => {
     const classes = useStyles();
+    const elList = (props.activeFilter == '') ? props.list : props.list.filter((el) => { return el.category == props.activeFilter });
     return (
         <div className={classes.container}>
-            {props.list.map((el, i)=> 
+            {elList.map((el, i)=> 
                 <Paper key={i} className={classes.box}>
                     <Typography variant="h5" component="h2">
                         {el.title}

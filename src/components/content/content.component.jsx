@@ -5,6 +5,7 @@ import TodoList from '../todo-list/todo-list';
 import firebase from '../../firebase/firebase.js'; // <--- add this line
 
 import Container from '@material-ui/core/Container';
+import Filter from '../filter/filter';
 
 class Content extends Component {
     constructor() {
@@ -14,7 +15,8 @@ class Content extends Component {
             list: [],
             categories: [],
             title: '',
-            category: ''
+            category: '',
+            activeFilter: ''
         }
     }
     componentDidMount() {
@@ -38,11 +40,10 @@ class Content extends Component {
       })
         
         
-        
-//       const catsRef = firebase.database().ref('categories');  
+          
         
 //         catsRef.push({
-//           title: "Udemy React",
+//           title: "Perso",
 //           color: "7986cb"  
 //         });
         
@@ -94,6 +95,16 @@ class Content extends Component {
         const itemRef = firebase.database().ref(`/items/${itemId}`);
         itemRef.remove();
     }
+    filterElement = (catName) => {
+            this.setState({
+                activeFilter: catName
+            })   
+    }
+    removeFilter = () => {
+        this.setState({
+            activeFilter: ''
+        })
+    }
     render() {
         return (
             <Container fixed>
@@ -102,7 +113,8 @@ class Content extends Component {
                             title={this.state.title} 
                             categories={this.state.categories}
                             category={this.state.category}  />
-                <TodoList list={this.state.list} removeElement={this.removeElement} />
+                <Filter  categories={this.state.categories} activeFilter={this.state.activeFilter} filterElement={this.filterElement} removeFilter={this.removeFilter} />
+                <TodoList list={this.state.list} activeFilter={this.state.activeFilter} removeElement={this.removeElement} />
             </Container>
         )
     }
