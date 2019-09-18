@@ -1,13 +1,14 @@
-import firebase from 'firebase'  
+import firebase from 'firebase';
+import {apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId} from '../config.js';
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyBKnRhpd3uGThHKlGVktVby5FPdBCz1XCQ",
-    authDomain: "todoapp-2c6e5.firebaseapp.com",
-    databaseURL: "https://todoapp-2c6e5.firebaseio.com",
-    projectId: "todoapp-2c6e5",
-    storageBucket: "",
-    messagingSenderId: "831096100566",
-    appId: "1:831096100566:web:c202051a49c480d6835b77"
+    apiKey: apiKey,
+    authDomain: authDomain,
+    databaseURL: databaseURL,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
