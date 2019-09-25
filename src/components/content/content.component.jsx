@@ -39,9 +39,6 @@ class Content extends Component {
         })   
       })
         
-        
-          
-        
 //         catsRef.push({
 //           title: "Perso",
 //           color: "7986cb"  
@@ -114,7 +111,7 @@ class Content extends Component {
                             categories={this.state.categories}
                             category={this.state.category}  />
                 <Filter  categories={this.state.categories} activeFilter={this.state.activeFilter} filterElement={this.filterElement} removeFilter={this.removeFilter} />
-                <TodoList list={this.state.list} activeFilter={this.state.activeFilter} removeElement={this.removeElement} />
+                <TodoList list={this.state.list} categories={this.state.categories} activeFilter={this.state.activeFilter} removeElement={this.removeElement} />
             </Container>
         )
     }

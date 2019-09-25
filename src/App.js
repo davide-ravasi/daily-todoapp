@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
 
 import NavBar from './components/navbar/navbar-component';
 import Content from './components/content/content.component';
+import ContentCat from './components/content-cat/content-cat.component';
 
 function App() {
   return (
     <div>
-      <NavBar />
-      <Content />
+      <NavBar />      
+      <Route path="/" exact component={Content} />
+      <Route path="/categories/" component={ContentCat} />
     </div>
   );
 }

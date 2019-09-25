@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   box : {
       flex: '1 0 auto',
       position: 'relative',
-      margin: '0 15px',
+      margin: '15px',
       padding: '15px'
   },
   closeBtn: {
@@ -35,25 +35,50 @@ const useStyles = makeStyles(theme => ({
   },
   chip: {
       marginTop: 15
-  }  
+  },
+  counter: {
+      backgroundColor: '#26a69a',
+      color: '#fff'
+  },  
+  mainTitle: {
+      marginTop: 20,
+      color: '#055090'
+  }    
 }));
 
 const TodoList = (props) => {
     const classes = useStyles();
     const elList = (props.activeFilter == '') ? props.list : props.list.filter((el) => { return el.category == props.activeFilter });
     return (
-        <div className={classes.container}>
-            {elList.map((el, i)=> 
-                <Paper key={i} className={classes.box}>
-                    <Typography variant="h5" component="h2">
-                        {el.title}
-                    </Typography>
-                    <Chip label={el.category} className={classes.chip} />  
-                    <IconButton aria-label="delete" className={classes.closeBtn} onClick={ () => props.removeElement(el.id) }>
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
-                </Paper>
-            )}
+        <div>
+            {props.categories.map((ele, z) => {
+                let elements = elList.filter((el) => el.category === ele.title);
+                let count = elements.length;
+                return (
+                    <div>
+                          {elements.map((el,i) => {
+                            return(
+                                <div>
+                                    { count > 0 && i === 0 && 
+                                         <Typography variant="h5" component="h2" className={classes.mainTitle}>
+                                            {ele.title} <Chip label={count} className={classes.counter} />
+                                        </Typography>
+                                    }
+                                    <Paper key={i} className={classes.box}>
+                                        <Typography variant="h5" component="h2">
+                                            {el.title}
+                                        </Typography>
+                                        <Chip label={el.category} className={classes.chip} />  
+                                        <IconButton aria-label="delete" className={classes.closeBtn} onClick={ () => props.removeElement(el.id) }>
+                                            <DeleteIcon fontSize="small" />
+                                        </IconButton>
+                                    </Paper>
+                                </div>    
+                            )
+                          })}
+                    </div>    
+                )
+            })}
         </div>
     )    
 }

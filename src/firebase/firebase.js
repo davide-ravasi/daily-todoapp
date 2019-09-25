@@ -14,3 +14,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export default firebase;
+
+
+// https://css-tricks.com/firebase-react-part-2-user-authentication/
