@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
 /*
     1 -- edit category
     2 -- add menu links
+    3 -- overlay to update state (cat added, cat modified..etc)
+    4 -- possibles links in list (as hyperlink)
+    5 -- search engine
 */
 
 const CatList = (props) => {

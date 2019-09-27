@@ -29,7 +29,7 @@ class Content extends Component {
           
          for (let cat in cats) {
               newState.push({ 
-                title: cats[cat].title,
+                name: cats[cat].name,
                 color: cats[cat].color
               });
          }
@@ -52,6 +52,7 @@ class Content extends Component {
           newState.push({
             id: item,  
             title: items[item].title,
+            links : items[item].links,  
             category: items[item].category
           });
         }
@@ -73,17 +74,19 @@ class Content extends Component {
     addElement = (event) => {
         event.preventDefault();
 
-        if(this.state.title != '' && this.state.category != '') {
+        if(this.state.title !== '' && this.state.links !== '' && this.state.category !== '') {
             
             const itemsRef = firebase.database().ref('items');
             const item = {
                 title: this.state.title,
+                links: this.state.links,
                 category: this.state.category
             }
             itemsRef.push(item);           
                         
             this.setState({
                 title: '',
+                links: '',
                 category: ''
             })   
         }          

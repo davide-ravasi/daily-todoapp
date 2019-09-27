@@ -43,7 +43,13 @@ const useStyles = makeStyles(theme => ({
   mainTitle: {
       marginTop: 20,
       color: '#055090'
-  }    
+  },
+  links: {
+      color: '#333',
+      textDecoration: 'none',
+      fontSize: 14,
+      marginTop: 5
+  }  
 }));
 
 const TodoList = (props) => {
@@ -52,7 +58,7 @@ const TodoList = (props) => {
     return (
         <div>
             {props.categories.map((ele, z) => {
-                let elements = elList.filter((el) => el.category === ele.title);
+                let elements = elList.filter((el) => el.category === ele.name);
                 let count = elements.length;
                 return (
                     <div>
@@ -61,13 +67,19 @@ const TodoList = (props) => {
                                 <div>
                                     { count > 0 && i === 0 && 
                                          <Typography variant="h5" component="h2" className={classes.mainTitle}>
-                                            {ele.title} <Chip label={count} className={classes.counter} />
+                                            {ele.name} <Chip label={count} className={classes.counter} />
                                         </Typography>
                                     }
                                     <Paper key={i} className={classes.box}>
                                         <Typography variant="h5" component="h2">
                                             {el.title}
                                         </Typography>
+                                        { el.links && 
+                                            <Typography variant="subtitle1" component="p" className={classes.links}>
+                                                <i className="material-icons md-18">link</i>
+                                                <a href={el.links} target="_blank">{el.links}</a>
+                                            </Typography>
+                                        }
                                         <Chip label={el.category} className={classes.chip} />  
                                         <IconButton aria-label="delete" className={classes.closeBtn} onClick={ () => props.removeElement(el.id) }>
                                             <DeleteIcon fontSize="small" />

@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(theme => ({  
@@ -51,11 +49,11 @@ export default function Filter(props) {
     return (
         <div className={classes.container}>
             {categoriesList.map((el, i)=>  {
-                    const isActive = props.activeFilter==el.title ? 'active' : 'diocane';
+                    const isActive = props.activeFilter===el.name ? 'active' : 'diocane';
                     return (
                       <Chip 
-                        label={el.title} 
-                        onClick={(e) => {e.preventDefault(); props.filterElement(el.title)}}
+                        label={el.name} 
+                        onClick={(e) => {e.preventDefault(); props.filterElement(el.name)}}
                         className={classes.chip +  ' ' + isActive}/>  
                     )
                 }        

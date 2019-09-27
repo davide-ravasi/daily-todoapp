@@ -1,3 +1,7 @@
+a {
+    color: #333;
+}
+
 .App {
   text-align: center;
 }
@@ -26,6 +30,11 @@
 .active {
     background-color: #26a69a !important;
     color: #fff !important;
+}
+
+.material-icons {
+    float: left;
+    margin-right: 10px;
 }
 
 @keyframes App-logo-spin {

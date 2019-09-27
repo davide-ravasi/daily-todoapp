@@ -49,7 +49,7 @@ class ContentCat extends Component {
     addElement = (e) => {
         e.preventDefault();
 
-        if(this.state.name != '' && this.state.color != '') {
+        if(this.state.name !== '' && this.state.color !== '') {
             
             const itemsRef = firebase.database().ref('categories');
             const category = {

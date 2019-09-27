@@ -46,12 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function AddElement(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
-
-  function handleChange(event) {
-    setAge(event.target.value);
-  }
 
   function handleClose() {
     setOpen(false);
@@ -76,6 +71,15 @@ export default function AddElement(props) {
                 value={props.title} 
                 fullWidth
                 onChange={(e) => props.onChangeValue(e)}  />
+            <TextField 
+                id="standard-name" 
+                type="text" 
+                name="links"
+                label="links"
+                className={classes.textField}
+                value={props.links} 
+                fullWidth
+                onChange={(e) => props.onChangeValue(e)}  />
             <FormControl className={classes.formControl}>
             <InputLabel htmlFor="category">category</InputLabel>
             <Select
@@ -91,7 +95,7 @@ export default function AddElement(props) {
                 }}
             >
                 {props.categories.map((value, index) => {
-                    return <MenuItem value={value.title}>{value.title}</MenuItem>
+                    return <MenuItem value={value.name}>{value.name}</MenuItem>
                 })}
             </Select>
             </FormControl>    
