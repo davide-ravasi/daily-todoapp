@@ -1,5 +1,5 @@
 a {
-    color: #333;
+    color: #555;
 }
 
 .App {
@@ -32,8 +32,18 @@ a {
     color: #fff !important;
 }
 
+.linkContainer a {
+    text-decoration: none;
+}
+
 .material-icons {
     float: left;
+    margin-right: 10px;
+    color: #555;
+}
+.showAddForm {
+    float: right;
+    margin-top: -20px;
     margin-right: 10px;
 }
 

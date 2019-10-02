@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AddElement from '../add-element/add.element';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import TodoList from '../todo-list/todo-list';
 
 import firebase from '../../firebase/firebase.js'; // <--- add this line
@@ -16,7 +18,8 @@ class Content extends Component {
             categories: [],
             title: '',
             category: '',
-            activeFilter: ''
+            activeFilter: '',
+            activeFormAdd: false
         }
     }
     componentDidMount() {
@@ -38,11 +41,6 @@ class Content extends Component {
             categories: newState
         })   
       })
-        
-//         catsRef.push({
-//           title: "Perso",
-//           color: "7986cb"  
-//         });
         
       itemsRef.on('value', (snapshot) => {
         let items = snapshot.val();
@@ -87,7 +85,8 @@ class Content extends Component {
             this.setState({
                 title: '',
                 links: '',
-                category: ''
+                category: '',
+                activeFormAdd: ''
             })   
         }          
     }
@@ -105,15 +104,23 @@ class Content extends Component {
             activeFilter: ''
         })
     }
+    showAddForm = (e) => {
+        e.preventDefault();
+        this.setState({
+            activeFormAdd: true
+        })
+    }    
     render() {
         return (
             <Container fixed>
-                <AddElement onChangeValue={this.onChangeValue} 
+                { this.state.activeFormAdd && <AddElement onChangeValue={this.onChangeValue} 
                             addElement={this.addElement} 
                             title={this.state.title} 
                             categories={this.state.categories}
                             category={this.state.category}  />
+                }    
                 <Filter  categories={this.state.categories} activeFilter={this.state.activeFilter} filterElement={this.filterElement} removeFilter={this.removeFilter} />
+                <Fab size="small" color="primary" aria-label="add" className="showAddForm" onClick={(e) => this.showAddForm(e)}><AddIcon /></Fab>
                 <TodoList list={this.state.list} categories={this.state.categories} activeFilter={this.state.activeFilter} removeElement={this.removeElement} />
             </Container>
         )

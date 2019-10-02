@@ -1,7 +1,6 @@
-    1 -- edit category
-    1b -- edit elements in todolist
-    2 -- add menu links
-    3 -- overlay to update state (cat added, cat modified..etc)
-    4 -- search engine
-    5 -- archive section with archive button
-   
+1 -- edit category
+1b -- edit elements in todolist
+----------show-hide form edit
+2 -- overlay to update state (cat added, cat modified..etc)
+3 -- search engine
+4 -- archive section with archive button

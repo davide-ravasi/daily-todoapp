@@ -5,11 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const useStyles = makeStyles(theme => ({  
   container: {
@@ -54,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 const TodoList = (props) => {
     const classes = useStyles();
-    const elList = (props.activeFilter == '') ? props.list : props.list.filter((el) => { return el.category == props.activeFilter });
+    const elList = (props.activeFilter === '') ? props.list : props.list.filter((el) => { return el.category === props.activeFilter });
     return (
         <div>
             {props.categories.map((ele, z) => {
@@ -77,7 +72,7 @@ const TodoList = (props) => {
                                         { el.links && 
                                             <Typography variant="subtitle1" component="p" className={classes.links}>
                                                 <i className="material-icons md-18">link</i>
-                                                <a href={el.links} target="_blank">{el.links}</a>
+                                                <a href={el.links} target="_blank" rel="noopener noreferrer">{el.links}</a>
                                             </Typography>
                                         }
                                         <Chip label={el.category} className={classes.chip} />  
