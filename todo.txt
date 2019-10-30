@@ -4,3 +4,6 @@
 2 -- overlay to update state (cat added, cat modified..etc)
 3 -- search engine
 4 -- archive section with archive button
+5 -- connection firebase
+6 -- insert user in db
+7 -- insert user in state
